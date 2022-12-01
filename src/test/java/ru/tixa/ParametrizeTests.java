@@ -34,7 +34,7 @@ public class ParametrizeTests {
 
     // ТЕСТ 1 @CsvSource
 
-    @Disabled //тест скрыт пока разбираюсь с csv файлом
+
     @DisplayName("Main menu sections")
     @CsvSource({
             "Industries", "Services", "Insights", "About Us"
@@ -49,7 +49,6 @@ public class ParametrizeTests {
 
      // ТЕСТ 2 @MethodSource
 
-    @Disabled //тест скрыт пока разбираюсь с csv файлом
     static Stream<Arguments> subSectionsInMainMenu() {
         return Stream.of(
                 Arguments.of("Industries", List.of("HEALTHCARE", "LOGISTICS", "MANUFACTURING", "RETAIL DIGITALIZATION", "WAREHOUSE MANAGEMENT")));
@@ -68,7 +67,7 @@ public class ParametrizeTests {
 
      // ТЕСТ3 @CsvFileSource
 
-    @CsvFileSource(resources = "filemainmenu.csv")
+    @CsvFileSource(resources = "1.csv")
     @ParameterizedTest(name="section {0} opens page with header {1}")
 
     void subSectionsInMainMenuFile ( String section, String header) {

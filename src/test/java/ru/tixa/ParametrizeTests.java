@@ -1,16 +1,17 @@
 package ru.tixa;
 
-import com.codeborne.selenide.CollectionCondition;
+
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+
 
 
 import java.util.List;
@@ -41,13 +42,12 @@ public class ParametrizeTests {
     })
 
     @ParameterizedTest(name = "Check sections {0} in  main menu")
-
     void flsMainMenuTest(String section) {
         $(".nav").shouldHave(text(section));
 
     }
 
-     // ТЕСТ 2 @MethodSource
+    // ТЕСТ 2 @MethodSource
 
     static Stream<Arguments> subSectionsInMainMenu() {
         return Stream.of(
@@ -55,22 +55,20 @@ public class ParametrizeTests {
 
 
     }
-    @MethodSource
-    @ParameterizedTest(name="subSection {1} is in MainMenu {0}" )
 
-
-    void subSectionsInMainMenu (String section, List<String> subsections){
+    @MethodSource("subSectionsInMainMenu")
+    @ParameterizedTest(name = "subSection {1} is in MainMenu {0}")
+    void subSectionsInMainMenu(String section, List<String> subsections) {
         $("#menu-item-195").click();
         $$(".aos-animate a").filter(visible).shouldHave(texts(subsections));
 
     }
 
-     // ТЕСТ3 @CsvFileSource
+    // ТЕСТ3 @CsvFileSource
 
     @CsvFileSource(resources = "1.csv")
-    @ParameterizedTest(name="section {0} opens page with header {1}")
-
-    void subSectionsInMainMenuFile ( String section, String header) {
+    @ParameterizedTest(name = "section {0} opens page with header {1}")
+    void subSectionsInMainMenuFile(String section, String header) {
         $(".nav").$(byText(section)).click();
         $$(".headline h1").filter(visible).shouldHave(texts(header));
     }
